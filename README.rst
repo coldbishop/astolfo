@@ -1,3 +1,6 @@
+.. image::https://goreportcard.com/badge/github.com/coldbishop/astolfo
+   :target: https://goreportcard.com/report/github.com/coldbishop/astolfo
+
 astolfo
 =======
 
