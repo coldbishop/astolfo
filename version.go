@@ -7,7 +7,7 @@ import (
 const (
 	appName         = "astolfo"
 	appVersionMajor = 0
-	appVersionMinor = 0
+	appVersionMinor = 1
 	appRevision     = 0
 )
 
