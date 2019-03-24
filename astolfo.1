@@ -1,0 +1,55 @@
+.TH astolfo 1 "2019-03-25" "astolfo 0.0.0" "astolfo manual"
+.SH NAME
+astolfo \- password generator
+.SH SYNOPSIS
+\fBastolfo\fR [OPTIONS] \fIUSERNAME\fR \fISITENAME\fR
+.SH DESCRIPTION
+\fBastolfo\fR generates password using the user's \fIUSERNAME\fR and \fISITENAME\fR.
+.LP
+Both \fIUSERNAME\fR and \fISITENAME\fR can be any name the user wants.
+.SH OPTIONS
+.TP
+\fB\-c\fR, \fB\-\-counter\fR=\fICOUNTER\fR
+Set the \fICOUNTER\fR value
+.TP
+\fB-L\fR, \fB--length\fR=\fILENGTH\fR
+Set the \fILENGTH\fR of the generated password;
+\fILENGTH\fR must range from 4 to 64
+.TP
+\fB-d\fR, \fB--digit\fR
+Turn on numeric characters
+.TP
+\fB-l\fR, \fB--lowercase\fR
+Turn on lowercase letters
+.TP
+\fB-p\fR, \fB--punctuation\fR
+Turn on punctuation characters
+.TP
+\fB-U\fR, \fB--uppercase\fR
+Turn on uppercase letters
+.TP
+\fB-m\fR, \fB--mode\fR=\fIBEHAVIOR\fR
+Set the preferred \fIBEHAVIOR\fR; possible values:
+   "hidecopy" (hide password, copy to clipboard)
+   "showcopy" (show password, copy to clipboard)
+   "showonly" (show password, don't copy to clipboard)
+.TP
+\fB-v\fR, \fB--verbose\fR
+Output more information
+.TP
+\fB--version\fR
+Display version information and exit
+.TP
+\fB-h\fR, \fB--help\fR
+Display the help usage and exit
+.LP
+If none of the \fB-dlpU\fR options are passed, they are all enabled by default.
+.SH AUTHOR
+Cold Bishop <cold at disroot dot org>
+.SH REPORTING BUGS
+Please report any bugs to <https://github.com/coldbishop/astolfo/issues>
+.SH COPYRIGHT
+Copyright (c) 2019 Cold Bishop
+.LP
+\fBastolfo\fR is licensed under the zlib license.
+
