@@ -55,9 +55,7 @@ func initAndCheck() error {
 		punctuation = true
 		digits = true
 	}
-	if behavior == "hidecopy" {
-		return nil
-	}
+
 	behavior = strings.ToLower(behavior)
 	switch behavior {
 	case "hidecopy":
