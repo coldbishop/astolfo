@@ -75,9 +75,9 @@ func inputPassword() ([]byte, error) {
 	var passwd []byte
 	var err error
 	for {
-		fmt.Print("Enter your master password: ")
+		fmt.Fprint(os.Stderr, "Enter your master password: ")
 		passwd, err = terminal.ReadPassword(int(syscall.Stdin))
-		fmt.Print("\n")
+		fmt.Fprint(os.Stderr, "\n")
 		if err != nil {
 			return nil, err
 		}
@@ -226,6 +226,7 @@ func main() {
 		}
 	}
 	if showPassword {
-		fmt.Println("Your password is:", generatedPassword)
+		fmt.Fprint(os.Stderr, "Your password is: ")
+		fmt.Println(generatedPassword)
 	}
 }
