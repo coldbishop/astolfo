@@ -54,16 +54,16 @@ Unicode (UTF-8 only) is supported.
 
     astolfo "猫宮ひなた" pixiv.net
 
-Run ``astolfo --help`` for more information.
+Run ``astolfo --help`` or ``man 1 astolfo`` for more information.
 
 Feature
 -------
 
+- Strong security courtesy of Argon2_ and BLAKE2_ algorithms
+- Easily generate multiple passwords using the same name and site name
 - Cross platform (GNU/Linux, macOS, Windows)
 - Portable, single binary without any runtime dependencies
-- Strong security courtesy of Argon2_ and BLAKE2_ algorithms
 - Unicode support (UTF-8) for user name, site name, and even the master password
-- Easily generate multiple passwords using the same name and site name
 - Automatic copy of the generated password to clipboard
 
 .. _Argon2: https://www.argon2.com
@@ -79,7 +79,6 @@ To-do
 -----
 
 - Diceware generator
-- Simple config file
 - Text-based user interface (TUI)
 - Graphical user interface (GUI)
 
