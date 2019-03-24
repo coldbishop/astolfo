@@ -90,6 +90,6 @@ License
 ``astolfo`` is licensed under the zlib License. See `LICENSE.rst`_.
 
 .. _LICENSE.rst: https://github.com/coldbishop/astolfo/blob/master/LICENSE.rst
-.. |go_report| image::https://goreportcard.com/badge/github.com/coldbishop/astolfo
+.. |go_report| image:: https://goreportcard.com/badge/github.com/coldbishop/astolfo
    :target: https://goreportcard.com/report/github.com/coldbishop/astolfo
 
