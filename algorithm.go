@@ -21,38 +21,7 @@ func algorithm(b []byte, passLength uint8, upper, lower, punct, digit bool) stri
 	// the magic number 94 is the total amount of printable ASCII characters
 	// minus the "space" character
 	s := make([]byte, 0, 94)
-
-	func(b *[]byte) {
-		if upper {
-			for i := 65; i <= 90; i++ {
-				*b = append(*b, byte(i))
-			}
-		}
-		if lower {
-			for i := 97; i <= 122; i++ {
-				*b = append(*b, byte(i))
-			}
-		}
-		if digit {
-			for i := 48; i <= 57; i++ {
-				*b = append(*b, byte(i))
-			}
-		}
-		if punct {
-			for i := 33; i <= 47; i++ {
-				*b = append(*b, byte(i))
-			}
-			for i := 58; i <= 64; i++ {
-				*b = append(*b, byte(i))
-			}
-			for i := 91; i <= 96; i++ {
-				*b = append(*b, byte(i))
-			}
-			for i := 123; i <= 126; i++ {
-				*b = append(*b, byte(i))
-			}
-		}
-	}(&s)
+	includeChars(&s, upper, lower, punct, digit)
 
 	lenS := len(s)
 	lenB := len(b)
@@ -104,4 +73,36 @@ func generateSeed(key []byte, siteName string, counter uint) ([]byte, error) {
 	hash.Write(siteNamePlusCounter)
 
 	return hash.Sum(nil), nil
+}
+
+func includeChars(b *[]byte, upper, lower, digit, punct bool) {
+	if upper {
+		for i := 65; i <= 90; i++ {
+			*b = append(*b, byte(i))
+		}
+	}
+	if lower {
+		for i := 97; i <= 122; i++ {
+			*b = append(*b, byte(i))
+		}
+	}
+	if digit {
+		for i := 48; i <= 57; i++ {
+			*b = append(*b, byte(i))
+		}
+	}
+	if punct {
+		for i := 33; i <= 47; i++ {
+			*b = append(*b, byte(i))
+		}
+		for i := 58; i <= 64; i++ {
+			*b = append(*b, byte(i))
+		}
+		for i := 91; i <= 96; i++ {
+			*b = append(*b, byte(i))
+		}
+		for i := 123; i <= 126; i++ {
+			*b = append(*b, byte(i))
+		}
+	}
 }
