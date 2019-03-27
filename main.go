@@ -64,7 +64,10 @@ func getEnvVars() {
 		}
 	}
 
-	behavior = os.Getenv("ASTOLFO_MODE")
+	astolfoMode = os.Getenv("ASTOLFO_MODE")
+	if astolfoMode != "" {
+		behavior = astolfoMode
+	}
 }
 
 func initAndCheck() error {
@@ -91,7 +94,7 @@ func initAndCheck() error {
 		showPassword = true
 		doNotCopyToClipboard = true
 	default:
-		fmt.Fprintf(os.Stderr, "unknown behavior value; defaulting to \"hidecopy\"\n")
+		warn(fmt.Errorf("unknown behavior value; defaulting to \"hidecopy\""))
 	}
 	return nil
 }
