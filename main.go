@@ -64,7 +64,7 @@ func getEnvVars() {
 		}
 	}
 
-	astolfoMode = os.Getenv("ASTOLFO_MODE")
+	astolfoMode := os.Getenv("ASTOLFO_MODE")
 	if astolfoMode != "" {
 		behavior = astolfoMode
 	}
@@ -209,7 +209,8 @@ func printUserParams() {
 	fmt.Printf("  Uppercase: %t\n", uppercase)
 	fmt.Printf("  Lowercase: %t\n", lowercase)
 	fmt.Printf("  Punctuations: %t\n", punctuation)
-	fmt.Printf("  Digits: %t\n\n", digits)
+	fmt.Printf("  Digits: %t\n", digits)
+	fmt.Printf("  Mode: %s\n\n", behavior)
 }
 
 func main() {
