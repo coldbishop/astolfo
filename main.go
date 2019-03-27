@@ -6,6 +6,7 @@ import (
 	"io"
 	"os"
 	"runtime"
+	"strconv"
 	"strings"
 	"syscall"
 	"unicode/utf8"
@@ -41,6 +42,30 @@ var (
 	showPassword         bool
 	behavior             string
 )
+
+func getEnvVars() {
+	astolfoLength := os.Getenv("ASTOLFO_LENGTH")
+	if astolfoLength != "" {
+		astolfoLenUint8, err := strconv.ParseUint(astolfoLength, 0, 8)
+		if err != nil {
+			warn(err)
+		} else {
+			passLength = uint8(astolfoLenUint8)
+		}
+	}
+
+	astolfoCounter := os.Getenv("ASTOLFO_COUNTER")
+	if astolfoCounter != "" {
+		astolfoCntUint, err := strconv.ParseUint(astolfoCounter, 0, 0)
+		if err != nil {
+			warn(err)
+		} else {
+			passCounter = uint(astolfoCntUint)
+		}
+	}
+
+	behavior = os.Getenv("ASTOLFO_MODE")
+}
 
 func initAndCheck() error {
 	if userName == "" || siteName == "" {
@@ -117,6 +142,8 @@ func parseArg() error {
 	pflag.BoolVarP(&isVerbose, "verbose", "v", false, "output more information")
 	pflag.BoolVar(&displayVersion, "version", false, "display version information and exit")
 	pflag.BoolVarP(&displayHelp, "help", "h", false, "display this help and exit")
+
+	getEnvVars()
 
 	pflag.Parse()
 
