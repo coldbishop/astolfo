@@ -16,6 +16,9 @@ Set the \fICOUNTER\fR value
 Set the \fILENGTH\fR of the generated password;
 \fILENGTH\fR must range from 4 to 64
 .TP
+\fB-t\fR, \fB--timeout\fR=\fISECOND\fR
+Set the duration (in seconds) until the generated password inside of the clipboard is cleared.
+.TP
 \fB-d\fR, \fB--digit\fR
 Turn on numeric characters
 .TP
@@ -50,6 +53,8 @@ If none of the \fB-dlpU\fR options are passed, they are all enabled by default.
 \fBASTOLFO_LENGTH\fR has the same function as \fB--length\fR
 .LP
 \fBASTOLFO_MODE\fR has the same function as \fB--mode\fR
+.LP
+\fBASTOLFO_TIMEOUT\fR has the same function as \fB--timeout\fR
 .LP
 Command line options will override environment variables options.
 .SH AUTHOR

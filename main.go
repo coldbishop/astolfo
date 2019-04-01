@@ -9,6 +9,7 @@ import (
 	"strconv"
 	"strings"
 	"syscall"
+	"time"
 	"unicode/utf8"
 
 	"github.com/atotto/clipboard"
@@ -40,20 +41,11 @@ var (
 	isVerbose            bool
 	doNotCopyToClipboard bool
 	showPassword         bool
+	timeout              uint
 	behavior             string
 )
 
 func getEnvVars() {
-	astolfoLength := os.Getenv("ASTOLFO_LENGTH")
-	if astolfoLength != "" {
-		astolfoLenUint8, err := strconv.ParseUint(astolfoLength, 0, 8)
-		if err != nil {
-			warn(err)
-		} else {
-			passLength = uint8(astolfoLenUint8)
-		}
-	}
-
 	astolfoCounter := os.Getenv("ASTOLFO_COUNTER")
 	if astolfoCounter != "" {
 		astolfoCntUint, err := strconv.ParseUint(astolfoCounter, 0, 0)
@@ -64,9 +56,29 @@ func getEnvVars() {
 		}
 	}
 
+	astolfoLength := os.Getenv("ASTOLFO_LENGTH")
+	if astolfoLength != "" {
+		astolfoLenUint8, err := strconv.ParseUint(astolfoLength, 0, 8)
+		if err != nil {
+			warn(err)
+		} else {
+			passLength = uint8(astolfoLenUint8)
+		}
+	}
+
 	astolfoMode := os.Getenv("ASTOLFO_MODE")
 	if astolfoMode != "" {
 		behavior = astolfoMode
+	}
+
+	astolfoTimeout := os.Getenv("ASTOLFO_TIMEOUT")
+	if astolfoTimeout != "" {
+		astolfoTimeUint, err := strconv.ParseUint(astolfoTimeout, 0, 0)
+		if err != nil {
+			warn(err)
+		} else {
+			timeout = uint(astolfoTimeUint)
+		}
 	}
 }
 
@@ -135,8 +147,12 @@ func parseArg() error {
 	lengthUsage := "set the length of the generated password\n"
 	lengthUsage += fmt.Sprintf("the `value` must range from %d to %d", minGenPassLength, maxGenPassLength)
 
+	timeoutUsage := "set the duration (in `second`s) until the generated\n"
+	timeoutUsage += "password inside the clipboard is erased"
+
 	pflag.UintVarP(&passCounter, "counter", "c", defaultPassCounter, "set the counter `value`")
 	pflag.Uint8VarP(&passLength, "length", "L", defaultPassLength, lengthUsage)
+	pflag.UintVarP(&timeout, "timeout", "t", 0, timeoutUsage)
 	pflag.BoolVarP(&digits, "digit", "d", false, "turn on numeric characters")
 	pflag.BoolVarP(&lowercase, "lowercase", "l", false, "turn on lowercase letters")
 	pflag.BoolVarP(&punctuation, "punctuation", "p", false, "turn on punctuation characters")
@@ -254,10 +270,20 @@ func main() {
 			showPassword = true
 		} else {
 			fmt.Fprintln(os.Stderr, "Password generated and copied to the clipboard!")
+			if timeout >= 1 {
+				fmt.Fprintf(os.Stderr, "%d second(s) until the clipboard is cleared...\n", timeout)
+				for i := timeout; i > 0; i-- {
+					time.Sleep(1 * time.Second)
+				}
+				clipboard.WriteAll("")
+				fmt.Fprint(os.Stderr, "The clipboard is all cleared!\n")
+			}
 		}
 	}
+
 	if showPassword {
 		fmt.Fprint(os.Stderr, "Your password is: ")
-		fmt.Println(generatedPassword)
+		fmt.Printf("%s", generatedPassword)
+		fmt.Fprint(os.Stderr, "\n")
 	}
 }
