@@ -8,7 +8,7 @@ const (
 	appName         = "astolfo"
 	appVersionMajor = 0
 	appVersionMinor = 1
-	appRevision     = 1
+	appRevision     = 2
 )
 
 func version() string {
