@@ -2,6 +2,8 @@ dist/
 bin/
 astolfo
 
+!cmd/**
+
 # Created by https://www.gitignore.io/api/go,vim,macos,linux,emacs,windows,notepadpp
 # Edit at https://www.gitignore.io/?templates=go,vim,macos,linux,emacs,windows,notepadpp
 
